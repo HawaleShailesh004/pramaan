@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-label="Pramaan trust boundary">
   <rect width="1200" height="700" fill="#0b0c10"/>
-  <text x="60" y="64" font-family="Georgia, serif" font-size="34" fill="#e8c547">Pramaan  trust boundary</text>
-  <text x="60" y="100" font-family="Segoe UI, sans-serif" font-size="17" fill="#9aa0ae">File vs fact · what the ledger may learn</text>
+  <text x="60" y="64" font-family="Georgia, serif" font-size="34" fill="#e8c547">Pramaan - trust boundary</text>
+  <text x="60" y="100" font-family="Segoe UI, sans-serif" font-size="17" fill="#9aa0ae">File vs fact ï¿½ what the ledger may learn</text>
 
   <!-- Private -->
   <rect x="60" y="150" width="520" height="480" rx="18" fill="#2b1b4a"/>
   <text x="320" y="200" text-anchor="middle" font-family="Georgia, serif" font-size="26" fill="#f4f1ea">On this device</text>
-  <text x="320" y="240" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" fill="#9aa0ae">Witnesses · never published</text>
+  <text x="320" y="240" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" fill="#9aa0ae">Witnesses ï¿½ never published</text>
   <text x="100" y="310" font-family="Segoe UI, sans-serif" font-size="18" fill="#f4f1ea">" CGPA (basis points)</text>
-  <text x="100" y="350" font-family="Segoe UI, sans-serif" font-size="18" fill="#f4f1ea">" Degree · graduation year</text>
+  <text x="100" y="350" font-family="Segoe UI, sans-serif" font-size="18" fill="#f4f1ea">" Degree ï¿½ graduation year</text>
   <text x="100" y="390" font-family="Segoe UI, sans-serif" font-size="18" fill="#f4f1ea">" Student secret</text>
   <text x="100" y="430" font-family="Segoe UI, sans-serif" font-size="18" fill="#f4f1ea">" Marksheet / papers</text>
   <text x="100" y="490" font-family="Segoe UI, sans-serif" font-size="16" fill="#c9b8e8">DigiLocker opens the file.</text>
@@ -21,7 +21,7 @@
   <text x="660" y="310" font-family="Segoe UI, sans-serif" font-size="18" fill="#f4f1ea">" Award Merkle root</text>
   <text x="660" y="350" font-family="Segoe UI, sans-serif" font-size="18" fill="#f4f1ea">" Issuer id (USAR allow-list)</text>
   <text x="660" y="390" font-family="Segoe UI, sans-serif" font-size="18" fill="#f4f1ea">" Policy hash (recruiter bar)</text>
-  <text x="660" y="430" font-family="Segoe UI, sans-serif" font-size="18" fill="#f4f1ea">" Revoke set · awardEpoch</text>
+  <text x="660" y="430" font-family="Segoe UI, sans-serif" font-size="18" fill="#f4f1ea">" Revoke set ï¿½ awardEpoch</text>
   <text x="660" y="470" font-family="Segoe UI, sans-serif" font-size="18" fill="#f4f1ea">" Tx success = meets policy</text>
   <text x="660" y="530" font-family="Segoe UI, sans-serif" font-size="16" fill="#b6f2c7">Failed proof = below bar /</text>
   <text x="660" y="560" font-family="Segoe UI, sans-serif" font-size="16" fill="#b6f2c7">fake root / revoked / expired</text>

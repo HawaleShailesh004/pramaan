@@ -33,7 +33,7 @@ midnight compact midnight.js typescript react vite express docker nodejs zero-kn
 
 ## Inspiration
 
-![Brand](https://raw.githubusercontent.com/HawaleShailesh004/pramaan/main/docs/media/brand-icon.svg)
+![Brand](https://raw.githubusercontent.com/HawaleShailesh004/pramaan/main/docs/media/brand-icon.png)
 
 Placement week smells like printouts and panic.
 
@@ -51,7 +51,7 @@ When I found Brainwave’s Midnight Track, I finally had language for that need.
 
 I built Pramaan as a **placement-cell pilot product** - not a circuit toy. The **slider is the product**.
 
-![Trust boundary](https://raw.githubusercontent.com/HawaleShailesh004/pramaan/main/docs/media/trust-boundary.svg)
+![Trust boundary](https://raw.githubusercontent.com/HawaleShailesh004/pramaan/main/docs/media/trust-boundary.png)
 
 | Platform rail | Cutoff checked? | Marksheet private? | Fake uni blocked? | Policy bait-and-switch stopped? |
 | --- | --- | --- | --- | --- |
@@ -75,7 +75,7 @@ The **public explorer** shows award counts, epoch, revoked count, and accepted p
 
 I shaped the product around placement week’s PDF drawer, then wired Midnight underneath.
 
-![Architecture](https://raw.githubusercontent.com/HawaleShailesh004/pramaan/main/docs/media/architecture.svg)
+![Architecture](https://raw.githubusercontent.com/HawaleShailesh004/pramaan/main/docs/media/architecture.png)
 
 - **Public Midnight deployment (eligibility):** Compact contract on **Midnight Preview** at `34448964df7df052fa142ce6b3b3635a7f5613d1831323e3aae50d19f4c3179d` (deployed 2026-08-26). Explorer: [explorer.preview.midnight.network](https://explorer.preview.midnight.network/) · deployer `mn_addr_preview1gzflnqjccr8tr6muekygdsa8tk5q6w5du0fd59jp5wlhl0qmu44shcwkw6`.
 - **Judge demo path (local stack):** Same circuits on **undeployed** Docker node + indexer - real Compact proofs via **proof-server 8.1.0**. Reproduce: `npm run setup` → `npm run api` → `npm run web` → `#demo` or `#recruiter`.

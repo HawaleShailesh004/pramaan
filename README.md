@@ -22,9 +22,9 @@ Sibling of [Silent Bell](https://github.com/HawaleShailesh004/silentbell) — sa
 | [COMPAT.md](COMPAT.md) | Versions + personas + Preview address |
 | [docs/media/](docs/media/) | Architecture SVGs + thumbnail prompts |
 
-![Architecture](docs/media/architecture.svg)
+![Architecture](docs/media/architecture.png)
 
-![Trust boundary](docs/media/trust-boundary.svg)
+![Trust boundary](docs/media/trust-boundary.png)
 
 ## Sponsor stack
 
