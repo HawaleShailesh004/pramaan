@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="Pramaan architecture">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#12131a"/>
+      <stop offset="100%" stop-color="#0b0c10"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <text x="60" y="72" font-family="Georgia, serif" font-size="36" fill="#e8c547">Pramaan  architecture</text>
+  <text x="60" y="108" font-family="Segoe UI, sans-serif" font-size="18" fill="#9aa0ae">Issuer awards ’ Compact provePolicy ’ recruiter policy hash</text>
+
+  <rect x="60" y="170" width="220" height="100" rx="12" fill="#14151c" stroke="#e8c547" stroke-width="2"/>
+  <text x="170" y="215" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="18" font-weight="600" fill="#f4f1ea">USAR Issuer</text>
+  <text x="170" y="244" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="#9aa0ae">CSV ’ issue / revoke</text>
+
+  <rect x="60" y="310" width="220" height="100" rx="12" fill="#14151c" stroke="#e8c547" stroke-width="2"/>
+  <text x="170" y="355" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="18" font-weight="600" fill="#f4f1ea">Student</text>
+  <text x="170" y="384" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="#9aa0ae">witness CGPA · prove</text>
+
+  <rect x="60" y="450" width="220" height="100" rx="12" fill="#14151c" stroke="#e8c547" stroke-width="2"/>
+  <text x="170" y="495" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="18" font-weight="600" fill="#f4f1ea">Recruiter</text>
+  <text x="170" y="524" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="#9aa0ae">slider ’ policy hash</text>
+
+  <rect x="60" y="590" width="220" height="100" rx="12" fill="#14151c" stroke="#c45c5c" stroke-width="2"/>
+  <text x="170" y="635" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="18" font-weight="600" fill="#f4f1ea">Fake issuer</text>
+  <text x="170" y="664" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="#9aa0ae">wrong root ’ fail</text>
+
+  <path d="M280 220 H360" stroke="#e8c547" stroke-width="2" fill="none"/>
+  <path d="M280 360 H360" stroke="#e8c547" stroke-width="2" fill="none"/>
+  <path d="M280 500 H360" stroke="#e8c547" stroke-width="2" fill="none"/>
+
+  <rect x="360" y="200" width="240" height="120" rx="12" fill="#1c1d26" stroke="#f4f1ea" stroke-width="1.5"/>
+  <text x="480" y="250" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#e8c547">Web UI</text>
+  <text x="480" y="280" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="#9aa0ae">React · Vite :5175</text>
+
+  <rect x="360" y="360" width="240" height="120" rx="12" fill="#1c1d26" stroke="#f4f1ea" stroke-width="1.5"/>
+  <text x="480" y="410" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#e8c547">Pramaan API</text>
+  <text x="480" y="440" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="#9aa0ae">:8790 · Midnight.js</text>
+
+  <rect x="360" y="520" width="240" height="120" rx="12" fill="#1c1d26" stroke="#f4f1ea" stroke-width="1.5"/>
+  <text x="480" y="570" text-anchor="middle" font-family="Georgia, serif" font-size="20" fill="#e8c547">Proof server</text>
+  <text x="480" y="600" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="14" fill="#9aa0ae">:6301 · Compact ZK</text>
+
+  <path d="M600 260 H680" stroke="#e8c547" stroke-width="2" fill="none"/>
+  <path d="M600 420 H680" stroke="#e8c547" stroke-width="2" fill="none"/>
+
+  <rect x="680" y="180" width="460" height="500" rx="16" fill="#0e2a24" stroke="#e8c547" stroke-width="2"/>
+  <text x="910" y="240" text-anchor="middle" font-family="Georgia, serif" font-size="26" fill="#e8c547">Midnight Compact</text>
+  <text x="910" y="290" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="16" fill="#b6f2c7">pramaan.compact</text>
+  <text x="910" y="350" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="16" fill="#f4f1ea">issueAward · revokeAward</text>
+  <text x="910" y="385" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="16" fill="#f4f1ea">setAwardEpoch · provePolicy</text>
+  <text x="910" y="450" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" fill="#9aa0ae">HistoricMerkleTree awards</text>
+  <text x="910" y="485" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" fill="#9aa0ae">revokedAwards set · awardEpoch</text>
+  <text x="910" y="560" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" fill="#e8c547">Discloses: policyHash only</text>
+  <text x="910" y="595" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" fill="#9aa0ae">Never: CGPA · roll · papers</text>
+</svg>

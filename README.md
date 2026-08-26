@@ -2,107 +2,105 @@
 
 **Prove the cutoff. Keep the marksheet.**
 
-Standalone Midnight Compact dApp for Brainwave 2026 Midnight Track. Sibling of [Silent Bell](https://github.com/HawaleShailesh004/silentbell) — same LEAF Merkle kit, different story: recruiters ask predicates, not PDFs.
+Brainwave 2026 - Midnight Track. A **placement-cell pilot product**: Compact proves an issued academic leaf meets a recruiter’s policy. The ledger learns pass/fail and the policy hash. It never learns CGPA, roll, or papers.
 
-> A circuit proves an issued academic leaf meets a recruiter’s policy. The ledger learns pass/fail and the policy hash. It never learns CGPA, roll, or papers.
-
-## Problem
-
-Campus placement week. A student mails a marksheet. The recruiter needed three facts — trusted issuer, CGPA ≥ cutoff, graduation year in range — not a PDF drawer. DigiLocker opens the file. Photoshop still exists. Pramaan issues **leaves**, not documents.
-
-| NAD / PDF | Pramaan |
+| Private (device) | Public (ledger) |
 | --- | --- |
-| Whole document | Predicate |
-| Logo, letterhead | Root in verifier allow-list |
-| Recruiter asks more after PDF | Policy hash bound in proof |
+| CGPA, degree, year, student secret | Award root, issuer id, policy hash |
+| Marksheet / papers | Revoke set, awardEpoch, tx outcome |
 
-## Ports (offset from Silent Bell)
+Sibling of [Silent Bell](https://github.com/HawaleShailesh004/silentbell) — same LEAF Merkle muscle, different door.
 
-| Service | Port |
+## Docs for judges
+
+| Doc | Purpose |
 | --- | --- |
-| Node | 9945 |
-| Indexer | 8089 |
-| Proof server | 6301 |
-| API | 8790 |
-| UI | 5175 |
+| [OVERVIEW.md](OVERVIEW.md) | Human story - problem → Midnight → product |
+| [docs/DEVPOST.md](docs/DEVPOST.md) | Paste-ready Devpost description |
+| [docs/DEMO-SCRIPT.md](docs/DEMO-SCRIPT.md) | What to show / what to say |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Components + circuits |
+| [COMPAT.md](COMPAT.md) | Versions + personas + Preview address |
+| [docs/media/](docs/media/) | Architecture SVGs + thumbnail prompts |
 
-## Phase 2 (complete pilot)
+![Architecture](docs/media/architecture.svg)
 
-- **Revocation set** — registrar revokes corrected awards; `provePolicy` checks `revokedAwards`
-- **Cohort rotation** — `awardEpoch` blocks replay across placement seasons
-- **Third student (Arya 8.1)** — passes 8.0 when Meera cannot
-- **NAD-shaped CSV import** — hash rows, never store PDF
-- **Policy templates** — recruiter presets (“7.0 B.Tech 2026”)
-- **Explorer + audit log** — `#explorer` ledger counts + receipt policy hashes
-- **POST /v1/verify** — bind txId to policy hash (production-shaped)
+![Trust boundary](docs/media/trust-boundary.svg)
 
-## Run locally
+## Sponsor stack
+
+- **Compact** - `contracts/pramaan.compact` (`issueAward`, `revokeAward`, `setAwardEpoch`, `provePolicy`)
+- **Midnight.js 4.1.1** - deploy + callTx
+- **proof-server 8.1.0** - proving
+- **node + indexer** - local Docker / Preview public endpoints
+- **Preview faucet** - public-network funding for eligibility
+
+## Quick start (local)
 
 ```bash
 cd pramaan
-npm install
-npm --prefix web install
-npm run compile          # once — Docker + ../tools compact + zk-params
-npm run setup            # docker compose + deploy to undeployed
-npm run test:fixtures    # offline leaf/policy checks
-npm run demo:flow        # CLI 120s script
-npm run api              # :8790
-npm run web              # :5175 → #recruiter for the slider
+npm install && npm --prefix web install
+npm run compile
+npm run setup
+npm run api          # :8790
+npm run web          # :5175
 ```
 
-## Demo script (judges)
+Open **http://localhost:5175/** → **#demo** or **#recruiter** (personas in `COMPAT.md`).
 
-1. **Awards** — publish Meera 7.4 + Kabir 6.2 (`#issuer`)
-2. **Cutoff** — slider **7.0** → Meera gold, Kabir fails (`#recruiter`)
-3. Move slider to **8.0** → Meera fails (same leaf, different question)
-4. **Fake university** — 9.9 CGPA, wrong root (`#fake`)
-5. **One-click** — `#demo` runs the full cast
+Ports are offset from Silent Bell (9945 / 8089 / 6301 / 8790 / 5175) so both stacks can run.
 
-Or: `npm run demo:flow` from the terminal.
+## Product flows
 
-## Screens
+1. **Issuer** - CSV awards → hashed leaves → revoke on correction.
+2. **Student** - private CGPA on device → prove for recruiter policy.
+3. **Recruiter** - cutoff slider → live policy hash → Meera / Kabir / Arya.
+4. **Bar moved** - same leaf, 8.0 → Meera fails (theatrical beat).
+5. **Fake uni** - untrusted root → FailWell.
+6. **Explorer** - counts + receipt policy hashes.
+7. **Live demo** - one-click cast for judges.
 
-| Route | Role |
-| --- | --- |
-| `/` | Story: file vs fact |
-| `#issuer` | Publish demo cohort |
-| `#meera` | Private leaf + prove for recruiter policy |
-| `#recruiter` | Slider + policy hash + two results |
-| `#fake` | Untrusted issuer fail |
-| `#explorer` | Ledger + recruiter audit log |
-| `#demo` | One-click judge cast |
+## Public deploy (Midnight Preview - eligibility)
 
-## Architecture
-
-- **Contract:** `contracts/pramaan.compact` — `issueAward`, `provePolicy`
-- **Leaves:** CGPA as integer basis points (740 = 7.40)
-- **Policy:** public inputs hashed; proof binds to recruiter’s bar
-- **Failure:** failed proof = fail (no `meets=false` on chain)
-
-## Public network (Preview)
-
-See [`docs/CONTRACT.md`](docs/CONTRACT.md).
-
-**Contract address (Preview):**  
-`34448964df7df052fa142ce6b3b3635a7f5613d1831323e3aae50d19f4c3179d`
+**Network:** Preview  
+**Contract:** `34448964df7df052fa142ce6b3b3635a7f5613d1831323e3aae50d19f4c3179d`  
+**Deployer:** `mn_addr_preview1gzflnqjccr8tr6muekygdsa8tk5q6w5du0fd59jp5wlhl0qmu44shcwkw6`  
+**Explorer:** https://explorer.preview.midnight.network/  
+**Deployed:** 2026-08-26
 
 ```bash
 npm run network preview
-npx tsx src/pramaan-deploy.ts --network preview   # after faucet funds wallet
+npx tsx src/print-address.ts --network preview
+# Fund mn_addr_preview… at https://faucet.preview.midnight.network
+npx tsx src/pramaan-deploy.ts --network preview
 ```
 
-Redeploy address lands in `.pramaan-state.json` (gitignored).
+## PreProd (optional twin)
 
-## Not in scope (hackathon)
+Prefer Preview for eligibility. PreProd sync/faucet can hang.
 
-- Exact CGPA disclosure (L2) — lead with boolean pass/fail
-- Bank income, Aadhaar, credit bureau
-- Affiliation with NAD/UGC — demo issuer only
+```bash
+npx tsx src/print-address.ts --network preprod
+# Fund at https://faucet.preprod.midnight.network
+npx tsx src/pramaan-deploy.ts --network preprod
+```
 
-## Private vs public
+## Threat model (pilot)
 
-| Stays on device | On ledger |
+| Threat | Mitigation |
 | --- | --- |
-| CGPA, papers, roll | Issuer root, award Merkle tree |
-| Student secret | Policy hash (from recruiter slider) |
-| | Proof success/failure (tx outcome) |
+| Marksheet on chain | Witness-only CGPA; failed/success tx, not PDF |
+| Recruiter bait-and-switch | Policy hash bound in proof |
+| Fake university | Leaf not in trusted issuer tree |
+| Corrected grades | Revocation set |
+| Stale proofs | awardEpoch cohort floor |
+| Exact score fishing | Default L0 boolean; no L2 lead |
+
+Not affiliated with NAD, UGC, or GGSIPU. Synthetic personas only.
+
+## Layout
+
+- `contracts/pramaan.compact`
+- `src/` - deploy, API, witnesses, receipts
+- `web/` - product UI
+- `docs/` - Devpost, demo script, architecture, media
+- `scripts/` - compile, fixtures, e2e

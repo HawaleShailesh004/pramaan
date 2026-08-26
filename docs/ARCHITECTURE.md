@@ -1,63 +1,49 @@
-# Pramaan architecture
+# Pramaan - architecture
 
-## Trust boundary
+## One diagram in words
 
 ```
-┌─────────────┐     witness      ┌──────────────────┐
-│   Student   │ ─ CGPA, secret ─▶│  provePolicy     │
-│   device    │                  │  (Compact)       │
-└─────────────┘                  └────────┬─────────┘
-                                        │ policy hash
-┌─────────────┐     admin tx     ┌──────▼─────────┐
-│ USAR Issuer │ ─ issue/revoke ─▶│  Midnight      │
-└─────────────┘                  │  ledger        │
-                                 │  · award tree  │
-┌─────────────┐     slider       │  · revoke set  │
-│  Recruiter  │ ─ policy hash ─▶ │  · awardEpoch  │
-└─────────────┘                  └────────────────┘
+USAR CSV ──issueAward──► Compact awards (Merkle leaves)
+                              │
+Student secret + CGPA ──provePolicy──► Midnight ledger
+                              │              (root, policy hash,
+                              │               revoke set, epoch)
+                              │
+Recruiter slider ──policyHash──► bound in successful proof
 ```
+
+## Components
+
+| Layer | What | Port / note |
+| --- | --- | --- |
+| Web UI | React + Vite product shell | 5175 |
+| Pramaan API | Issue / prove / import / revoke / receipts | 8790 |
+| Proof server | ZK proving | 6301 (Docker; Preview uses 6300 often) |
+| Node + indexer | Local Midnight stack | Docker Compose |
+| Compact | `pramaan.compact` | managed under `contracts/` |
 
 ## Circuits
 
-| Circuit | Role | Discloses |
+| Circuit | Who | Effect |
 | --- | --- | --- |
-| `issueAward` | Registrar | Leaf insert (hash only) |
-| `revokeAward` | Registrar | Revocation id in set |
-| `setAwardEpoch` | Registrar | Cohort year floor |
-| `provePolicy` | Student | Policy hash on success |
+| `issueAward` | Issuer | Insert award leaf hash |
+| `revokeAward` | Issuer | Add revoke id to set |
+| `setAwardEpoch` | Issuer | Cohort year floor |
+| `provePolicy` | Student | Membership + comparisons; disclose policy hash |
 
-## `provePolicy` checks
+## Trust boundary
 
-1. Merkle path opens current `awards` root
-2. `cgpaBps >= minCgpaBps`
-3. `degree == policy.degree`
-4. `year <= maxYear`
-5. `year >= awardEpoch` (cohort rotation)
-6. Leaf not in `revokedAwards`
-7. Return `policyHash(minCgpa, degree, maxYear)`
-
-Failed proof = failed tx. No `meets=false` on success path.
-
-## Off-chain
-
-| Component | Purpose |
+| Private (device) | Public (ledger) |
 | --- | --- |
-| Express API | Issue, prove, import CSV, verify receipts |
-| `.pramaan-receipts.json` | Recruiter audit log (demo) |
-| Web UI | Slider, templates, explorer |
+| CGPA bps, degree, year, secret | Award root / membership |
+| Marksheet plaintext | Policy hash on success |
+| | Revoke set, awardEpoch |
 
-## Data model
+## Diagrams
 
-- **CGPA:** integer basis points (`740` = 7.40)
-- **Policy hash:** `persistentHash("pramaan:policy:v1", minCgpa, degree, maxYear)`
-- **Revoke id:** `persistentHash("pramaan:revoke:", awardLeaf)`
+- [architecture.svg](media/architecture.svg)
+- [trust-boundary.svg](media/trust-boundary.svg)
 
-## Ports (vs Silent Bell)
+## Threat model (pilot)
 
-| Service | Pramaan | Silent Bell |
-| --- | --- | --- |
-| Node | 9945 | 9944 |
-| Indexer | 8089 | 8088 |
-| Proof | 6301 | 6300 |
-| API | 8790 | 8789 |
-| UI | 5175 | 5174 |
+See root [README.md](../README.md#threat-model-pilot) and [COMPAT.md](../COMPAT.md).
