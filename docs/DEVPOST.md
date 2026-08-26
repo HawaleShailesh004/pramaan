@@ -8,6 +8,8 @@ Pramaan lets students prove they meet a recruiter’s CGPA bar on Midnight — w
 
 **Built with:** midnight compact midnight.js typescript react vite express docker merkle-tree zero-knowledge campus placements proof-server
 
+**Repo:** [https://github.com/HawaleShailesh004/pramaan](https://github.com/HawaleShailesh004/pramaan)
+
 ---
 
 ## Inspiration
