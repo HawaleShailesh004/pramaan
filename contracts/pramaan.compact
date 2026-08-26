@@ -1,0 +1,115 @@
+pragma language_version >= 0.23;
+
+import CompactStandardLibrary;
+
+// Pramaan - prove a cutoff without the marksheet.
+// Award leaves are issued into a Merkle tree. The circuit discloses
+// only policy hash on success; CGPA stays witness-only.
+
+export sealed ledger adminPk: Bytes<32>;
+export sealed ledger issuerId: Bytes<32>;
+export ledger awardEpoch: Uint<32>;
+export ledger awards: HistoricMerkleTree<4, Bytes<32>>;
+export ledger revokedAwards: Set<Bytes<32>>;
+
+witness local_secret_key(): Bytes<32>;
+witness getAwardPath(leaf: Bytes<32>): MerkleTreePath<4, Bytes<32>>;
+witness awardCgpaBps(): Uint<16>;
+witness awardDegree(): Uint<32>;
+witness awardYear(): Uint<16>;
+
+circuit derivePk(sk: Bytes<32>): Bytes<32> {
+  return persistentHash<Vector<2, Bytes<32>>>([
+    pad(32, "pramaan:pk:"),
+    sk
+  ]);
+}
+
+circuit deriveAwardLeaf(
+  sk: Bytes<32>,
+  cgpaBps: Uint<16>,
+  degree: Uint<32>,
+  year: Uint<16>
+): Bytes<32> {
+  return persistentHash<Vector<5, Bytes<32>>>([
+    pad(32, "pramaan:award:v1"),
+    sk,
+    cgpaBps as Field as Bytes<32>,
+    degree as Field as Bytes<32>,
+    year as Field as Bytes<32>
+  ]);
+}
+
+circuit deriveRevokeId(leaf: Bytes<32>): Bytes<32> {
+  return persistentHash<Vector<2, Bytes<32>>>([
+    pad(32, "pramaan:revoke:"),
+    leaf
+  ]);
+}
+
+circuit policyHash(
+  minCgpaBps: Uint<16>,
+  degree: Uint<32>,
+  maxYear: Uint<16>
+): Bytes<32> {
+  return persistentHash<Vector<4, Bytes<32>>>([
+    pad(32, "pramaan:policy:v1"),
+    minCgpaBps as Field as Bytes<32>,
+    degree as Field as Bytes<32>,
+    maxYear as Field as Bytes<32>
+  ]);
+}
+
+circuit requireAdmin(): [] {
+  const sk = local_secret_key();
+  assert(disclose(derivePk(sk) == adminPk), "Not issuer");
+}
+
+constructor(id: Bytes<32>) {
+  const sk = local_secret_key();
+  adminPk = disclose(derivePk(sk));
+  issuerId = disclose(id);
+  awardEpoch = 2026;
+}
+
+export circuit setAwardEpoch(next: Uint<32>): [] {
+  requireAdmin();
+  awardEpoch = disclose(next);
+}
+
+export circuit issueAward(leaf: Bytes<32>): [] {
+  requireAdmin();
+  awards.insert(disclose(leaf));
+}
+
+export circuit revokeAward(leaf: Bytes<32>): [] {
+  requireAdmin();
+  const rid = deriveRevokeId(leaf);
+  revokedAwards.insert(disclose(rid));
+}
+
+export circuit provePolicy(
+  minCgpaBps: Uint<16>,
+  degree: Uint<32>,
+  maxYear: Uint<16>
+): Bytes<32> {
+  const sk = local_secret_key();
+  const cgpa = awardCgpaBps();
+  const deg = awardDegree();
+  const year = awardYear();
+
+  assert(disclose(deg == degree), "Degree does not match policy");
+  assert(disclose(cgpa >= minCgpaBps), "Below cutoff");
+  assert(disclose(year <= maxYear), "Year out of range");
+  assert(disclose(year >= awardEpoch), "Cohort expired");
+
+  const leaf = deriveAwardLeaf(sk, cgpa, deg, year);
+  const rid = deriveRevokeId(leaf);
+  assert(disclose(!revokedAwards.member(disclose(rid))), "Award revoked");
+
+  const path = getAwardPath(leaf);
+  const root = merkleTreePathRoot<4, Bytes<32>>(path);
+  assert(awards.checkRoot(disclose(root)), "Award not issued by this issuer");
+
+  return disclose(policyHash(minCgpaBps, degree, maxYear));
+}

@@ -1,0 +1,58 @@
+{
+  "name": "pramaan",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Pramaan - prove a CGPA cutoff without sharing the marksheet (Midnight Compact)",
+  "license": "MIT",
+  "scripts": {
+    "compile": "bash scripts/compile-docker.sh",
+    "setup": "npx tsx src/setup.ts",
+    "deploy": "npx tsx src/pramaan-deploy.ts",
+    "deploy:preprod": "npx tsx src/pramaan-deploy.ts --network preprod",
+    "print-address": "npx tsx src/print-address.ts",
+    "api": "npx tsx src/pramaan-api.ts",
+    "demo:flow": "npx tsx src/pramaan-flow.ts",
+    "test:fixtures": "npx tsx scripts/fixture-test.ts",
+    "test:e2e": "npx tsx scripts/e2e-check.ts",
+    "web": "npm --prefix web run dev",
+    "build": "npx tsc --noEmit || true",
+    "network": "npx tsx src/network.ts",
+    "proof-server:start": "docker compose up -d",
+    "proof-server:stop": "docker compose down",
+    "clean": "rm -rf contracts/managed .midnight-state.json .midnight-wallet-state .pramaan-state.json",
+    "postinstall": "node scripts/dedupe-onchain-runtime.mjs"
+  },
+  "dependencies": {
+    "@midnight-ntwrk/compact-runtime": "0.16.0",
+    "@midnight-ntwrk/midnight-js-contracts": "4.1.1",
+    "@midnight-ntwrk/midnight-js-http-client-proof-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-indexer-public-data-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-level-private-state-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-network-id": "4.1.1",
+    "@midnight-ntwrk/midnight-js-node-zk-config-provider": "4.1.1",
+    "@midnight-ntwrk/midnight-js-protocol": "4.1.1",
+    "@midnight-ntwrk/midnight-js-types": "4.1.1",
+    "@midnight-ntwrk/midnight-js-utils": "4.1.1",
+    "@midnight-ntwrk/onchain-runtime-v3": "3.0.0",
+    "@midnight-ntwrk/wallet-sdk": "1.2.0",
+    "@scure/bip39": "2.2.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "rxjs": "^7.8.2",
+    "ws": "^8.21.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.0.0",
+    "@types/ws": "^8.18.1",
+    "tsx": "^4.23.1",
+    "typescript": "^6.0.3"
+  },
+  "overrides": {
+    "@midnight-ntwrk/onchain-runtime-v3": "3.0.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
