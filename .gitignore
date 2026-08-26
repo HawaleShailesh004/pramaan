@@ -50,5 +50,4 @@ pids/
 *.pid.lock
 
 # Internal-only (not for public repo)
-SUBMISSION.md
 docs/media/VIDEO-SCRIPT.md

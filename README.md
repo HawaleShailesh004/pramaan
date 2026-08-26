@@ -81,6 +81,8 @@ Or: `npm run demo:flow` from the terminal.
 
 ## Public network (Preview)
 
+See [`docs/CONTRACT.md`](docs/CONTRACT.md).
+
 **Contract address (Preview):**  
 `34448964df7df052fa142ce6b3b3635a7f5613d1831323e3aae50d19f4c3179d`
 
