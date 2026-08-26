@@ -79,14 +79,17 @@ Or: `npm run demo:flow` from the terminal.
 - **Policy:** public inputs hashed; proof binds to recruiter’s bar
 - **Failure:** failed proof = fail (no `meets=false` on chain)
 
-## PreProd
+## Public network (Preview)
+
+**Contract address (Preview):**  
+`34448964df7df052fa142ce6b3b3635a7f5613d1831323e3aae50d19f4c3179d`
 
 ```bash
-npm run network preprod
-npx tsx src/pramaan-deploy.ts --network preprod   # after faucet funds wallet
+npm run network preview
+npx tsx src/pramaan-deploy.ts --network preview   # after faucet funds wallet
 ```
 
-Contract address lands in `.pramaan-state.json`.
+Redeploy address lands in `.pramaan-state.json` (gitignored).
 
 ## Not in scope (hackathon)
 

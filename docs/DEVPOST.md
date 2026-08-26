@@ -55,7 +55,8 @@ npm run setup && npm run api && npm run web
 
 Open `#recruiter` — move the slider. Run `#demo` for one-click judge cast.
 
-**Contract (PreProd):** _pending — see README_
+**Contract (Midnight Preview):**  
+`34448964df7df052fa142ce6b3b3635a7f5613d1831323e3aae50d19f4c3179d`
 
 ## What's next
 
